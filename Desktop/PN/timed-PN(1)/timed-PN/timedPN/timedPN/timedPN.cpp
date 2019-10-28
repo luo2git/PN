@@ -8,6 +8,7 @@
 #include "new_or_old.h"
 #include "CreateNode.h"
 #include"output.h"
+#include"back_tree.h"
 
 
 
@@ -26,13 +27,13 @@ int main()
 {
 	InitSMatrix(&C_pre);   
 	printf("创建前置关联矩阵C_pre: ");
-	CreateSMatrix(&C_pre, "C:\\Users\\A237\\Desktop\\新建文件夹 - 副本\\timed-PN(1)\\timed-PN\\C_pref.txt");
+	CreateSMatrix(&C_pre, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\C_pref.txt");
 	OutputSMatrix(C_pre);  
 	printf("\n");
 	
 	InitSMatrix(&C_post);
 	printf("创建后置关联矩阵C_post: ");
-	CreateSMatrix(&C_post, "C:\\Users\\A237\\Desktop\\新建文件夹 - 副本\\timed-PN(1)\\timed-PN\\C_postf.txt");
+	CreateSMatrix(&C_post, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\C_postf.txt");
 	OutputSMatrix(C_post);   
 	printf("\n");
 
@@ -88,4 +89,8 @@ int main()
 		s = s->next_open;
 	} while (s != NULL);
 	output(&ReachableTree);
+	back_tree(&ReachableTree);
+	out(&ReachableTree);
+
+
 }

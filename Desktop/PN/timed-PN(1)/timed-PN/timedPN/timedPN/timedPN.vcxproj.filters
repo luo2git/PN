@@ -74,6 +74,9 @@
     <ClCompile Include="Completecrosslinkedlist .cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="back_tree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\C_postf.txt">

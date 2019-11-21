@@ -25,16 +25,16 @@ CrossList C;
 */
 int main()
 {
-	InitSMatrix(&C_pre);   
+	InitSMatrix(&C_pre);
 	printf("创建前置关联矩阵C_pre: ");
-	CreateSMatrix(&C_pre, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\C_pref.txt");
-	OutputSMatrix(C_pre);  
+	CreateSMatrix(&C_pre, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\pre.txt");
+	OutputSMatrix(C_pre);
 	printf("\n");
-	
+
 	InitSMatrix(&C_post);
 	printf("创建后置关联矩阵C_post: ");
-	CreateSMatrix(&C_post, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\C_postf.txt");
-	OutputSMatrix(C_post);   
+	CreateSMatrix(&C_post, "C:\\Users\\A237\\Desktop\\PN\\timed-PN(1)\\timed-PN\\post.txt");
+	OutputSMatrix(C_post);
 	printf("\n");
 
 	CompuSMatrix(C_post, C_pre, &C);
@@ -63,14 +63,16 @@ int main()
 	s = ReachableTree.head_Node;  //指向树的第一个结点的地址赋给指针s
 	do
 	{
-		
+		//printf("current_mark:");
 		for (int j = 0; j < place_num; j++)
 		{
 			current_mark[j] = s->new_m[j];    //将新表中第j行的标识赋值给当前的标识
+//			printf("%d", current_mark[j]);
 			current_mark_x[j] = s->new_m_x[j];
 			
 
 		}
+		//printf("\n");
 
 		current_mark_g = s->new_m_g;				//已耗费时间更新
 		ReachableTree.source_node = s;   //当前标识的信息成为了下一个结点的来源结点
@@ -88,9 +90,10 @@ int main()
 		}
 		s = s->next_open;
 	} while (s != NULL);
-	output(&ReachableTree);
-	back_tree(&ReachableTree);
-	out(&ReachableTree);
+	//output1(&ReachableTree);
+	output2(&ReachableTree);
+	/*back_tree(&ReachableTree);
+	out(&ReachableTree);*/
 
 
 }

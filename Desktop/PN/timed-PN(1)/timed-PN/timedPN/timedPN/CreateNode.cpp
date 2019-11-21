@@ -25,12 +25,15 @@ void CreateNode(Tree *Tr, int Transition, int current_m[],int place_num,int Dela
 		x[i] = new_m_x[i];
 		m[i] = current_m[i];
 	}
+	
 	while (P != NULL)//更新标识
 	{
+		/*printf("m[%d]", P->i);*/
 		m[P->i] = m[P->i] + (P->e);
+		/*printf("%d", m[P->i]);*/
 		P = P->down;
 	}
-
+	//printf("\n");
 	while (Q != NULL) //更新step 
 	{
 		ans = Delay[Q->i] * (Q->e) - x[Q->i];                //损耗时间=赋时时间*前置值-已等待时间      

@@ -9,18 +9,18 @@
 判断树当前结点（former指向的结点）是新还是旧
 Tree *Tr :  树
 Return void
-*/
+*/ //&& (*Tr).current_node->new_m_x[i] == P->new_m_x[i]    (*Tr).current_node->new_m_g == P->new_m_g 
 bool new_or_old(Tree *Tr)//判断是新的还是旧的 
 {
-	int i, Flag, same;
-	same = 1;
+	int i, Flag;
+	int same = 1,a=1;
 	struct Node *P, *S;
 	P = (* Tr).head_Node;
 	do
 	{
 		for (i = 0; i < (*Tr).place_num; i++)
 		{
-			if ((*Tr).current_node->new_m[i] == P->new_m[i] && (*Tr).current_node->new_m_x[i] == P->new_m_x[i])//生成的新标识与链表的第一个结点的标识每一位判断是否相同（相同为真） 
+			if ((*Tr).current_node->new_m[i] == P->new_m[i])//生成的新标识与链表的第一个结点的标识每一位判断是否相同（相同为真） 
 			{
 				same = 1;
 			}
@@ -30,7 +30,22 @@ bool new_or_old(Tree *Tr)//判断是新的还是旧的
 				break;//标识与第i行不同则退出循环判断下一行 
 			}
 		}
-		if (same == 1 && (*Tr).current_node->new_m_g == P->new_m_g)
+		if (same == 1)
+		{
+			for (i = 0; i < 27; i++)
+			{
+				if ((*Tr).current_node->new_m_x[i] == P->new_m_x[i] || (*Tr).current_node->new_m_x[i] - P->new_m_x[i] >= 10)
+				{
+					a = 1;
+				}
+				else
+				{
+					a = 0;
+					break;
+				}
+			}
+		}
+		if (same == 1 &&((*Tr).current_node->new_m_g - P->new_m_g >=10 || (*Tr).current_node->new_m_g == P->new_m_g) &&a==1)
 		{
 			Flag = 0;
 			(*Tr).current_node->old = 1;

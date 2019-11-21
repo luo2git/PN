@@ -99,11 +99,11 @@ void CreateSMatrix(CrossList *M, const char *path)
 	{
 		while (1)
 		{
-			if (fgets(line, 100, pFile) == NULL) 
+			if (fgets(line, 300, pFile) == NULL) 
 				break;
 
 			/*分割每行*/
-			char *pch = strtok(line, " ");//如果不是空，则使用strtok函数按照空格符划分，放在一个字符型指针
+			char *pch = strtok(line, "	");//如果不是空，则使用strtok函数按照空格符划分，放在一个字符型指针
 
 			while (pch != NULL)
 			{
@@ -120,6 +120,10 @@ void CreateSMatrix(CrossList *M, const char *path)
 					p->i = irow;
 					p->j = icol;
 					p->e = val;
+					/*printf("i:%d", p->i);
+					printf("j:%d", p->j);
+					printf("e:%d", p->e);
+					printf("\n");*/
 
 					/*生成结点后，要考虑一下行头指针如何与第一个不为0的元素链接起来
 					 判断行头指针、列头指针选择插入的情况：
@@ -140,7 +144,7 @@ void CreateSMatrix(CrossList *M, const char *path)
 						{
 							//从该行的行链表头开始，直到找到
 							q = (*M).rhead[irow];
-							p->right = q->right=NULL; // 完成行插入 
+							p->right = q->right; // 完成行插入 
 							q->right = p;
 						}
 
@@ -170,7 +174,7 @@ void CreateSMatrix(CrossList *M, const char *path)
 				}
 
 				// 继续分割
-				pch = strtok(NULL, " ");
+				pch = strtok(NULL, "	");
 			}
 
 			irow++;
@@ -208,12 +212,12 @@ int OutputSMatrix(CrossList M)
 {
 	int i, j;
 	OLink p;
-	//printf("%d行%d列%d个非零元素\n", M.mu, M.nu, M.tu);
-	//printf("请输入选择(1.按行输出 2.按列输出): ");
-	//scanf("%d", &i);
-	//switch (i)
-	//{
-	//case 1://选择按行输出
+	printf("%d行%d列%d个非零元素\n", M.mu, M.nu, M.tu);
+	printf("请输入选择(1.按行输出 2.按列输出): ");
+	scanf("%d", &i);
+	switch (i)
+	{
+	case 1://选择按行输出
 		for (j = 0; j < M.mu; j++)
 		{
 			p = M.rhead[j];
@@ -223,18 +227,18 @@ int OutputSMatrix(CrossList M)
 				p = p->right;
 			}
 		}
-		//break;
-	//case 2://选择按列输出
-	//	for (j = 0; j < M.nu; j++)
-	//	{
-	//		p = M.chead[j];
-	//		while (p)
-	//		{
-	//			printf("%d行%d列值为%d\n", (p->i), (p->j), p->e);
-	//			p = p->down;
-	//		}
-	//	}
-	//}
+		break;
+	case 2://选择按列输出
+		for (j = 0; j < M.nu; j++)
+		{
+			p = M.chead[j];
+			while (p)
+			{
+				printf("%d行%d列值为%d\n", (p->i), (p->j), p->e);
+				p = p->down;
+			}
+		}
+	}
 	return 1;
 }
 
